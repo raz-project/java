@@ -1,0 +1,52 @@
+<form #formInfo="ngForm" >
+  Title: <input required pattern="^[A-Z].+$"  #titleInfo="ngModel" type="text" placeholder="Title.." [(ngModel)] ="coupon.title" name="title">
+   <span *ngIf="!titleInfo.errors?.required && titleInfo.invalid && titleInfo.touched">First letter must be capitale</span>
+   <span *ngIf="!titleInfo.errors?.pattern && titleInfo.invalid && titleInfo.touched">First letter is missing</span>
+   <br><br>
+   Start Date Of The Coupon<input required pattern="^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$"  #startDateInfo="ngModel" type="date" placeholder="StartDate.." [(ngModel)] ="coupon.startDate" name="startDate">
+   <span *ngIf="!startDateInfo.errors?.required && !startDateInfo.touched">Missing date</span>
+   <span *ngIf="!startDateInfo.errors?.pattern && startDateInfo.invalid && startDateInfo.touched">Your date invalid</span>
+   <br><br>
+   End Date Of The Coupon<input required pattern="^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$"  #endDateInfo="ngModel" type="date" placeholder="EndDate.." [(ngModel)] ="coupon.endDate" name="endDate">
+   <span *ngIf="!endDateInfo.errors?.required && endDateInfo.invalid && !endDateInfo.touched">Missing date</span>
+   <span *ngIf="!endDateInfo.errors?.pattern && endDateInfo.invalid && endDateInfo.touched">Your date invalid</span>
+   <br><br>
+   Amount<input required pattern="^[0-9].+$"  #amountInfo="ngModel" type="number" placeholder="Amount.." [(ngModel)] ="coupon.amount" name="amount">
+   <span *ngIf="!amountInfo.errors?.required && amountInfo.invalid && !amountInfo.touched">Missing amount</span>
+   <span *ngIf="!amountInfo.errors?.pattern && amountInfo.invalid && amountInfo.touched">Must Contain Number</span>
+   <br>
+   <br>
+   <!-- Category<input required pattern="^[A-Z]"  #categoryInfo="ngModel" type="text" placeholder="Category.." [(ngModel)] ="coupon.category" name="category"> -->
+   Category    <select  [(ngModel)]="selectedCategory" class="form-control" name="category">
+    <option *ngFor="let category of categories" >
+        {{category}}
+    </option>
+</select>
+   <!-- <span *ngIf="categoryInfo.errors?.required && categoryInfo.invalid && categoryInfo.touched">Missing category</!-->
+   <!-- <span *ngIf="categoryInfo.errors?.pattern && categoryInfo.invalid && categoryInfo.touched">Must Contain Number Between 1 - 8</span> -->
+   <br>
+   <br>
+   Message<input required pattern="^[A-Z].+$"  #messageInfo="ngModel" type="text" placeholder="Message.." [(ngModel)] ="coupon.message" name="message">
+   <span *ngIf="!messageInfo.errors?.required && messageInfo.invalid && !messageInfo.touched">Missing message</span>
+   <span *ngIf="!messageInfo.errors?.pattern && messageInfo.invalid && messageInfo.touched">First Letter Is Missing</span>
+   <br>
+   <br>
+   Price<input required pattern="(\d+\.\d{1,2})"  #priceInfo="ngModel" type="text" placeholder="Price.." [(ngModel)] ="coupon.price" name="price">
+   <span *ngIf="!priceInfo.errors?.required && priceInfo.invalid && priceInfo.touched">Missing price</span>
+   <span *ngIf="!priceInfo.errors?.pattern && priceInfo.invalid && priceInfo.touched">Invalid Price</span>
+   <br>
+   <br>
+   ImageURL<input required pattern="(http(s?):)([/|.|\|:|\w|\s|-])*\.(?:jpg|gif|png)"  #imageInfo="ngModel" type="url" placeholder="ImageURL.." [(ngModel)] ="coupon.imageURL" name="imageURL">
+   <span *ngIf="!imageInfo.errors?.required && imageInfo.invalid &&! imageInfo.touched">Missing URL</span>
+   <span *ngIf="!imageInfo.errors?.pattern && imageInfo.invalid && imageInfo.touched">Cannot Save Photo </span>
+   <br>
+   <br>
+
+ <button [disabled] = "!formInfo.form.invalid" (click)="addCoupon()">Add New Coupon</button>
+</form>
+
+<br>
+<br>
+<a routerLink="/company" routerLinkActive ="active" >back to list</a>
+
+

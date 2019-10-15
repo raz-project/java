@@ -1,0 +1,65 @@
+<h3>"Customer" coupons</h3>
+<section>
+  <div >
+    <table>
+      <tr>
+        <td>Below Price: <input  (input)="price =$event.target.value" required pattern="^[(\d+\.\d{1,2})]" ([ngModel])="price"  type="number"  name="price">
+        </td>
+         <td ><button  (click)="getByBellowPrice(price)"  >search</button>
+        </td>
+      </tr>
+      <tr>
+          <td>Choose category :<select (input)="category =$event.target.value"  name="category" ([ngModel])="category">
+              <option *ngFor="let category of categories" >
+                  {{category}}
+              </option>
+          </select>
+          </td>
+          <td  ><button (click)="getByCategory(category)"  >search</button>
+          </td>
+
+    </table>
+  </div>
+  </section>
+
+
+<div>
+<table *ngIf="coupons?.length==0">
+  <tr >
+      <td >You have no coupons yet</td><td></td>
+    </tr>
+  </table>
+<table class=“demo” *ngIf="coupons">
+    <tr>
+  <th>Title</th>
+
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Message</th>
+      <th>Price</th>
+      <th>Image</th>
+
+  </tr>
+
+
+
+  <tbody>
+    <tr *ngFor="let coupon of coupons">
+<td>{{coupon.title}}</td>
+<td>{{coupon.startDate | myDate| date : 'mediumDate' }}</td>
+<td>{{coupon.endDate | myDate| date : 'mediumDate' }}</td>
+<td>{{coupon.amount}}</td>
+<td>{{coupon.category}}</td>
+<td>{{coupon.message}}</td>
+<td>{{coupon.price}}</td>
+<td> <img src="https://213775-651844-1-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2016/04/printable-coupons.jpg"></td>
+</tr>
+
+  </tbody>
+</table>
+</div>
+
+<br>
+<a routerLink="/all-coupons" routerLinkActive ="active">To shop</a>

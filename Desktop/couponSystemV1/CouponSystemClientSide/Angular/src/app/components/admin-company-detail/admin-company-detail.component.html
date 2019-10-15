@@ -1,0 +1,21 @@
+<form #formInfo="ngForm" >
+  Full name: <input required pattern="^[A-Z].+$"  #nameInfo="ngModel" type="text" placeholder="Name.." [(ngModel)] ="company.name" name="name">
+   <span *ngIf="!nameInfo.errors?.required && nameInfo.invalid && nameInfo.touched">First letter must be capitale</span>
+   <span *ngIf="!nameInfo.errors?.pattern && nameInfo.invalid && nameInfo.touched">First letter is missing</span>
+   <br><br>
+   Password: <input required pattern= "^[A-Z].+$"  #passwordInfo="ngModel" type="text" placeholder="pass***.." [(ngModel)] ="company.password" name="password">
+   <span *ngIf="!passwordInfo.errors?.required && passwordInfo.invalid && !passwordInfo.touched">Missing date</span>
+   <span *ngIf="!passwordInfo.errors?.pattern && passwordInfo.invalid && passwordInfo.touched">Your date invalid</span>
+   <br><br>
+  Email: <input required pattern="^[A-Z].+$"   #emailInfo="ngModel" type="text" placeholder="Email@.." [(ngModel)] ="company.email" name="email">
+   <span *ngIf="!emailInfo.errors?.required && emailInfo.invalid && !emailInfo.touched">Missing date</span>
+   <span *ngIf="!emailInfo.errors?.pattern && emailInfo.invalid && emailInfo.touched">Your date invalid</span>
+   <br><br>
+
+
+ <button [disabled] = "!formInfo.form.invalid" (click)="addClient()">update</button>
+</form>
+
+<br>
+<br>
+<a routerLink="/admin" routerLinkActive ="active" >back to list</a>

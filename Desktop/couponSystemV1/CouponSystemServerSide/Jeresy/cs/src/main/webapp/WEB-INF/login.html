@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Coupon System</title>
+</head>
+<body>
+	<form action="login" method="post">
+		<fieldset>
+			<legend>Login</legend>
+			User name: <br /> <input type="text" name="userName" /> <br>
+			Password: <br /> <input type="password" name="password" /> <br />
+		</fieldset>
+		<fieldset class="radiogroup">
+			<legend>Select login type</legend>
+			<ul>
+				<li><input type="radio" name="loginType" id="item1"
+					value="ADMIN" /><label for="item1">ADMIN</label></li>
+				<li><input type="radio" name="loginType" id="item2"
+					value="COMPANY" /><label for="item2">COMPANY</label></li>
+				<li><input type="radio" name="loginType" id="item3"
+					value="CUSTOMER" /><label for="item3">CUSTOMER</label></li>
+			</ul>
+		</fieldset>
+	<input type="submit" value="Login">
+	
+	</form>
+</body>
+</html>

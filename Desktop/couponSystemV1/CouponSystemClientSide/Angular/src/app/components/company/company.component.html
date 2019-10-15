@@ -1,0 +1,80 @@
+<h3>"Company" coupons</h3>
+<div>
+  <table>
+    <tr>
+      <td>Below Price: <input  (input)="price =$event.target.value" required pattern="^[(\d+\.\d{1,2})]"  type="number" [ngModel]="price" name="price">
+      </td>
+       <td ><button  (click)="getByBellowPrice(price)" [disabled]= "selectedPricefilter" >search</button>
+      </td>
+    </tr>
+    <tr>
+        <td>Choose category :<select (input)="category =$event.target.value" [ngModel]="category"  name="category" >
+            <option *ngFor="let category of categories" >
+                {{category}}
+            </option>
+        </select>
+        </td>
+        <td  ><button (click)="getByCategory(category)"  >search</button>
+        </td>
+      <tr>
+          <td>Choose date: <input (input)="newDate =$event.target.value" required pattern="^[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$" type="date" ([ngModel])="newDate">
+          </td>
+
+          <td ><button (click)="getByDate(newDate)">search</button>
+          </td>
+        </tr>
+  </table>
+
+
+</div>
+<table *ngIf="coupons?.length==0">
+  <tr >
+      <td >You have no coupons yet</td><td></td>
+    </tr>
+  </table>
+<table class=“demo” *ngIf="coupons">
+    <tr>
+  <th>Title</th>
+
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Message</th>
+      <th>Price</th>
+      <th>Image</th>
+      <th>remove</th>
+      <th>update</th>
+  </tr>
+
+
+
+  <tbody  >
+    <tr *ngFor="let coupon of coupons">
+<td>{{coupon.title}}</td>
+<td>{{coupon.startDate | myDate| date : 'mediumDate' }}</td>
+<td>{{coupon.endDate | myDate| date : 'mediumDate' }}</td>
+<td>{{coupon.amount}}</td>
+<td>{{coupon.category}}</td>
+<td>{{coupon.message}}</td>
+<td>{{coupon.price}}</td>
+<td>{{coupon.imageURL}}</td>
+<td>  <input type="button"(click)="remove(coupon.id)" value="remove" name="remove"></td>
+ <td>  <a routerLink="/update-coupon/{{coupon.id}}" routerLinkActive ="active" >Update</a></td>
+<td><button (click)=update() >update</button></td>
+</tr>
+    <tr *ngIf="updateCalled">
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="button" value="Send"> </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<a routerLink="/add-coupon" routerLinkActive ="active">Add coupon</a>

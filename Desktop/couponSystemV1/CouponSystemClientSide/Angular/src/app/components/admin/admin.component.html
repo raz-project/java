@@ -1,0 +1,59 @@
+
+<h3>all Clients in db: </h3>
+<br>
+<button (click)=changeIndecator() >create</button><br> <table>
+ <tr *ngIf="createOn">
+   <td><input type="text" [(ngModel)]="userName" name="userName"></td>
+   <td><input type="text" [(ngModel)]="password"></td>
+   <td *ngIf="clients[0].email"><input type="text"  [(ngModel)]="email" name="email"></td>
+   <td><button  (click)="createClient()">create</button></td>
+
+ </tr>
+
+</table>
+
+
+<table  class=“demo” *ngIf="clients">
+
+    <tr >
+      <th>User Name: </th>
+      <th>Password: </th>
+      <th *ngIf="clients[0].email" >Email</th>
+      <th>Delete: </th>
+      <th>Update :</th>
+
+  </tr>
+
+  <tbody  >
+    <tr *ngFor="let client of clients">
+<td>   <input *ngIf="updateCalled" type="text" [(ngModel)]="client.name" name="name">{{client.name}}</td>
+<td>   <input *ngIf="updateCalled" type="text" [(ngModel)]="client.password" name="password">{{client.password}}</td>
+<td *ngIf="client.email">{{client.email}}</td><td *ngIf="updateCalled"></td>
+<td>  <input type="button"(click)="removeClient(client.id)"  name="remove" value="delete"></td>
+<td>  <input type="button"(click)="updateClient(client.id)"  name="update" value="update"></td>
+
+
+</tr>
+
+  </tbody>
+</table>
+
+<section>
+<div >
+  <table>
+
+    <tr>
+        <td>Choose Client :<select (input)="type =$event.target.value" ([ngModel])="type"  name="type" >
+            <option>company</option>
+            <option >customer</option>
+        </select>
+        </td>
+        <td  ><button (click)="getClient(type)"  >search</button>
+        </td>
+
+  </table>
+</div>
+</section>
+
+
+

@@ -1,0 +1,18 @@
+<div class="login-page">
+    <div class="form">
+      <form class="login-form" #formInfo="ngForm" (ngSubmit)="onSubmit()" >
+        <input [(ngModel)] ="username" #nameInfo="ngModel" name="name" type="text" placeholder="username"/>
+        <input [(ngModel)] ="password" #passwordInfo="ngModel" name="password" type="password" placeholder="password" />
+        <legend>Select login type
+            <br>
+			<label>ADMIN||<input [(ngModel)] ="loginType" type="radio"  name="optradio" value="admin" /></label>
+                    <label>COMPANY||<input [(ngModel)] ="loginType"  type="radio" name="optradio"
+					value="company" /></label>
+                    <label>CUSTOMER <input  [(ngModel)] ="loginType" type="radio" name="optradio"
+                    value="customer"/></label>
+                </legend>
+        <button type="submit" >login</button>
+        <a routerLink="/register" routerLinkActive ="active">Register</a>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,32 @@
+
+input,button{
+
+  margin:10px ;
+  display: inline;
+
+}
+
+form{
+  overflow: hidden;
+  margin-top: 50px;
+  box-sizing: border-box;
+}
+
+span{
+  margin: 10px;
+  position: absolute;
+}
+
+a{
+  color: blue;
+  font-size: x-large;
+  font-family: Arial;
+  display:block;
+  margin-top: 20px;
+
+}
+
+.active{
+  color:blue;
+  font-weight: bold;
+}
