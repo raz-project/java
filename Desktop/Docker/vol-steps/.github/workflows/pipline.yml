@@ -1,0 +1,23 @@
+name: Docker CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check Docker Version
+        run: docker --version
+
+      - name: List Docker Volumes
+        run: docker volume ls
+
+      - name: Prune Unused Docker Volumes
+        run: docker volume prune -f
