@@ -1,0 +1,52 @@
+name: CI/CD Pipeline
+
+# Trigger the workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code from GitHub repo
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Docker Buildx (multi-platform support)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Step 3: Log in to DockerHub
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME_USR }}
+          password: ${{ secrets.DOCKER_PASSWORD_PSW }}
+
+      # Step 4: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t my-java-app .
+
+      # Step 5: Tag Docker image
+      - name: Tag Docker image
+        run: |
+          docker tag my-java-app ${{ secrets.DOCKER_USERNAME_USR }}/my-java-app:${{ github.sha }}
+
+      # Step 6: Push Docker image to DockerHub
+      - name: Push Docker image to DockerHub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME_USR }}/my-java-app:${{ github.sha }}
+
+      # Step 7: Run Docker container
+      - name: Run Docker container
+        run: |
+          docker run -d --name my-java-container ${{ secrets.DOCKER_USERNAME_USR }}/my-java-app:${{ github.sha }}
+
+      # Step 8: Verify the container is running
+      - name: Verify container is running
+        run: |
+          docker ps
