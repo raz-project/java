@@ -47,6 +47,6 @@ jobs:
           docker run -d --name my-java-container ${{ secrets.DOCKER_USERNAME_USR }}/my-java-app:${{ github.sha }}
 
       # Step 8: Verify the container is running
-      - name: Verify container is running
+      - name: Verifyy container is running
         run: |
           docker ps
