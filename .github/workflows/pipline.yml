@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest sleep infinity
+    runs-on: ubuntu-alpine
 
     steps:
       # Step 1: Checkout code from GitHub repo
