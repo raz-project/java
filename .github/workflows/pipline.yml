@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest sleep infinity
 
     steps:
       # Step 1: Checkout code from GitHub repo
@@ -34,20 +34,17 @@ jobs:
       # Step 5: Tag Docker image
       - name: Tag Docker image
         run: |
-          set COMMIT_SHA=$(git rev-parse --short HEAD)
-          docker tag my-java-app ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ COMMIT_SHA }}
+          docker tag my-java-app ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
 
       # Step 6: Push Docker image to DockerHub
       - name: Push Docker image to DockerHub
         run: |
-          set COMMIT_SHA=$(git rev-parse --short HEAD)
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ COMMIT_SHA }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
 
       # Step 7: Run Docker container
       - name: Run Docker container
         run: |
-          set COMMIT_SHA=$(git rev-parse --short HEAD)
-          docker run -d --name my-java-container ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ COMMIT_SHA }}
+          docker run -d --name my-java-container ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
 
       # Step 8: Verify the container is running
       - name: Verify container is running
